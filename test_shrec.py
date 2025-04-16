@@ -8,11 +8,9 @@ from eval.evaluate import *
 from dataset.shrec2020 import SHREC2020
 from dataset.shrec2021 import SHREC2021
 from model.yolo import Detect_Framework
-from model.loss import ComputeLoss,ComputeLoss_EIOU,ComputeLoss_NWD,ComputeLoss_Eiou_NWD
+from model.loss import ComputeLoss_EIOU
 from util.calculate import *
-
 import time
-
 os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
 
 start = time.time()
@@ -42,10 +40,6 @@ def test_shrec2021(opt):
     model = Detect_Framework( class_num=13, anchors=ANCHOR,anchor_num=3)
     model = load_model(model, opt)
 
-    # compute_loss = ComputeLoss(model = model,
-    #             class_num=13, 
-    #             anchor_num=3, 
-    #             anchor= ANCHOR)
 
     compute_loss = ComputeLoss_EIOU(model = model,
                  class_num=13, 
@@ -101,12 +95,11 @@ def test_shrec2021(opt):
         print('Test Time:{:.2f}'.format(epoch_duration))
         print('EVAL Result:')
         print('Loss: %.6f \t Conf Loss: %.6f \t Class Loss: %.6f' % (np.mean(loss_list), np.mean(loss_conf_list), np.mean(loss_cls_list)))
-        # print(final_pred_list[1:80,:])
-        
+
         fscore = evaluate_shrec2021(final_pred_list,base_dir=opt.dataset_dir,data_id=9)
 
         df = pd.DataFrame(final_pred_list)
-        df.to_csv('./test_result/shrec2021/227_c3cbam_eiou_42.csv',sep=',',header=False,index=False)
+        df.to_csv('./test_result/shrec2021/result.csv',sep=',',header=False,index=False)
 
         end = time.time()
         time_duration = end-start
@@ -132,11 +125,9 @@ def test_shrec2020(opt):
         Pre-cluster results, 9 types
     """
     ##########
-    # ANCHOR = torch.tensor([[[11], [18], [29]]])
+
     ANCHOR = torch.tensor([[[5], [10], [15]]])
-    # ANCHOR = torch.tensor([[[7], [14], [24]]])
-    # ANCHOR = torch.tensor([[[10], [14], [19], [29]]])
-   
+
     ##########
     
     model = Detect_Framework( class_num=12, anchors=ANCHOR,anchor_num=3)
@@ -147,13 +138,6 @@ def test_shrec2020(opt):
                 class_num=12, 
                 anchor_num=3, 
                 anchor= ANCHOR)
-
-    # compute_loss = ComputeLoss_Eiou_NWD(model = model,
-    #             class_num=12, 
-    #             anchor_num=3, 
-    #             anchor= ANCHOR)
-    
-
 
     print("---- Evaluating Model ----")
     model.eval()
@@ -188,7 +172,6 @@ def test_shrec2020(opt):
 
                 b_pred = pred[b,mask,:]
                 b_pred = b_pred.cpu()
-                # index = Soft_Non_Maximum_Suppression(b_pred[:, :5], nms_thres)
                 index = Non_Maximum_Suppression(b_pred[:, :5], nms_thres)
                 b_pred = b_pred[index, :]
                 pred_list.append(b_pred)
@@ -209,7 +192,7 @@ def test_shrec2020(opt):
         fscore = evaluate_shrec2020(final_pred_list,base_dir=opt.dataset_dir,data_id=9)
 
         df = pd.DataFrame(final_pred_list)
-        df.to_csv('./test_result/shrec2020/0218_C3CBAM_aug4.csv',sep=' ',header=False,index=False)
+        df.to_csv('./test_result/shrec2020/result.csv',sep=' ',header=False,index=False)
 
         end = time.time()
         time_duration = end-start
@@ -220,27 +203,12 @@ def test_shrec2020(opt):
 def create_parser():
     parser = argparse.ArgumentParser()
 
-    ### test shrec 2021
-
     #project options
     parser.add_argument('--model_name', type=str, default='YOLOv5', help='Name of this experiment.')
     parser.add_argument('--gpu_ids', type=str, default='0', help='GPU ids, use -1 for CPU.')
-    
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/noaug', help='The directory of the pretrained model.')
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/choice2', help='The directory of the pretrained model.')
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/choice2', help='The directory of the pretrained model.')
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/choice3', help='The directory of the pretrained model.')
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/121_C3CBAM_NWD_augchoice4', help='The directory of the pretrained model.')
+
     parser.add_argument('--load_dir', type=str, default='./checkpoints_2020/0218_C3CBAM_aug4', help='The directory of the pretrained model.')
-    
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/118_C3CBAM_aug4choice4', help='The directory of the pretrained model.')
-    # """important"""
-    # parser.add_argument('--dataset_dir', type=str, default='/storage_data/su_xiaofeng/shrec_data/shrec_2021', help='The directory of the used dataset')
-    
-    
-    # parser.add_argument('--load_dir', type=str, default='./checkpoints_2021/0216_C3CBAM_aug62', help='The directory of the pretrained model.')
-    # """important"""
-    # parser.add_argument('--dataset_dir', type=str, default='/storage_data/su_xiaofeng/shrec_data/shrec_2021', help='The directory of the used dataset')
+
     parser.add_argument('--dataset_dir', type=str, default='/storage_data/su_xiaofeng/shrec_data/shrec_2020/shrec2020_full_dataset', help='The directory of the used dataset')
     
     #testing options

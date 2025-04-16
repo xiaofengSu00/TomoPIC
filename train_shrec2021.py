@@ -8,7 +8,6 @@ from model.yolo import Detect_Framework
 from model.loss import ComputeLoss_EIOU
 from eval.evaluate import evaluate_shrec2021
 from util.calculate import *
-
 os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
 
 def create_parser():
@@ -22,9 +21,7 @@ def create_parser():
 	parser.add_argument('--dataset_dir', type=str,
 						default='/storage_data/su_xiaofeng/shrec_data/shrec_2021',
 						help='The directory of the used dataset')
-	# parser.add_argument('--dataset_dir', type=str,
-	# 					default='/data/su_xiaofeng/shrec_data/shrec2021',
-	# 					help='The directory of the used dataset')
+
 	# training options
 	parser.add_argument('--total_epoches', type=int, default=200, help='Total epoches.')
 	parser.add_argument('--checkpoint_interval', type=int, default=10, help='Interval between saving model weights')
@@ -58,9 +55,7 @@ def train(opt):
 	from datetime import datetime
 
 	device = prepare_devices(opt)
-	# opt.gpu_num = 2
-	# opt.device = device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-	# device = opt.device
+
 	
 	train_time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 	if not os.path.exists(os.path.join(opt.save_dir, train_time)):

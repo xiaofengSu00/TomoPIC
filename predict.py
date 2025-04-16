@@ -133,14 +133,10 @@ def create_parser():
 
     # predict options
     parser.add_argument('--pretrained', type=bool, default=True, help='Use pretrained model.')
-    # parser.add_argument('--load_filename', type=str, default='YOLO3D_EPOCH[1000].pth',
-	# 					help='Filename of the pretrained model.')
-    # parser.add_argument('--load_filename', type=str, default='YOLO3D_EPOCH[480].pth',
-	# 					help='Filename of the pretrained model.')
+
     parser.add_argument('--load_filename', type=str, default='best_network.pth',
 						help='Filename of the pretrained model.')
-    # parser.add_argument('--load_filename', type=str, default='YOLO3D_EPOCH[360].pth',
-						# help='Filename of the pretrained model.')
+
     opt = parser.parse_args()
 
     return opt

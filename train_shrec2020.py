@@ -12,7 +12,6 @@ from util.calculate import *
 from datetime import datetime
 os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
 
-
 def create_parser():
 	parser = argparse.ArgumentParser()
 	# project options
@@ -217,17 +216,15 @@ def train(opt):
 
 				from eval.evaluate import evaluate_shrec2020
 
-				# SHREC2020_EVAL(final_pred_list,
-				#          base_dir='/storage_data/su_xiaofeng/shrec_data/shrec_2020/shrec2020_full_dataset')
 				fscore = evaluate_shrec2020(final_pred_list,data_id=8)
 				early_stopping(fscore=fscore, model=model, opt=opt, epoch=epoch)
 
 		if epoch % opt.checkpoint_interval == 0:
 			save_model(model, opt, epoch)
 
-		# if early_stopping.early_stop:
-		# 	print(f'Early stopping at epoch {epoch}')
-		# 	break
+		if early_stopping.early_stop:
+			print(f'Early stopping at epoch {epoch}')
+			break
 
 		scheduler.step()
 		
