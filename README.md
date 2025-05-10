@@ -35,7 +35,7 @@ python test_shrec.py --load_dir <the directory of the pretrained model> --datase
 ### EMPIAR-10045
 #### step1: deconvloution
 ```
-python deconvlution.py --tomo_dir ./tomoset  --deconv_folder ./deconv --pixel_size 8.68 --snrfalloff 0.6
+python deconvlution.py --tomo_dir ./tomo_bin4  --deconv_folder ./deconv --pixel_size 8.68 --snrfalloff 0.6
 ```
 #### step2: prepare data
 ```
