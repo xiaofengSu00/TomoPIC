@@ -1,6 +1,6 @@
 # TomoPIC：Fast particle detection method for Cryo-electron tomography
 ## I The overview of TomoPIC
-！[image](image/overview.png)
+[image](https://github.com/yijianSU22/TomoPIC/blob/main/image/overview.jpg)
 ## II Installation
 The first step is to create a new conda virtual environment:
 ```
