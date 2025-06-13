@@ -22,7 +22,8 @@ pip install -r requirement.txt
 ```
 ## III Particle picking tutorial
 Detailed tutorials for two sample datasets of SHREC2021 and EMPIAR-10045 are provided. Main steps of TomoPIC includeds preprocessing, traning of TomoPIC, inference of TomoPIC. Here, we provides two sample datasets of EMPIAR-10045 and SHREC2021 for particle picking to enable you to learn the processing flow of TomoPIC. The sample dataset can be download as follow: 
-*  Baidu Netdisk Link: https://pan.baidu.com/s/1aijM4IgGSRMwBvBk5XbBmw; verification code: cbmi
+*  Baidu Netdisk Link: https://pan.baidu.com/s/1gdOeRVgzxP6gjgE7yOa2HQ?pwd=a7rp  
+
 
 ### SHREC2021
 #### step1: training of TomoPIC
