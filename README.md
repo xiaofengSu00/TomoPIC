@@ -15,14 +15,14 @@ To download the codes, please do:
 git clone https://github.com/yijianSU22/TomoPIC.git
 cd TomoPIC
 ```
-Next, install a custom pytorch and relative packages needed by DeepETPicker:
+Next, install a custom pytorch and relative packages needed by TomoPIC:
 ```
+pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirement.txt
 ```
 ## III Particle picking tutorial
 Detailed tutorials for two sample datasets of SHREC2021 and EMPIAR-10045 are provided. Main steps of TomoPIC includeds preprocessing, traning of TomoPIC, inference of TomoPIC. Here, we provides two sample datasets of EMPIAR-10045 and SHREC2021 for particle picking to enable you to learn the processing flow of TomoPIC. The sample dataset can be download as follow: 
-SHREC2021 dataset: [SHREC2021](https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/XRTJMA)  
-EMPIAR-10045 dataset:[EMPIAR-10045](https://pan.baidu.com/s/18-Uo8XViWOXnkzclyPjVxw?pwd=2aiv)
+*  Baidu Netdisk Link: https://pan.baidu.com/s/1aijM4IgGSRMwBvBk5XbBmw; verification code: cbmi
 
 ### SHREC2021
 #### step1: training of TomoPIC
