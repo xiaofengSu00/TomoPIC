@@ -190,12 +190,12 @@ class CustomDataset(Dataset):
         # Create an empty array with the same shape
         translated_data = np.zeros_like(data)
 
-		# Calculate valid slicing ranges
+	# Calculate valid slicing ranges
         z_range = slice(max(0, -z_shift), min(z_dim, z_dim - z_shift))
         y_range = slice(max(0, -y_shift), min(y_dim, y_dim - y_shift))
         x_range = slice(max(0, -x_shift), min(x_dim, x_dim - x_shift))
 
-		# Perform translation
+	# Perform translation
         translated_data[z_range, y_range, x_range] = data[
 			slice(max(0, z_shift), min(z_dim, z_dim + z_shift)),
 			slice(max(0, y_shift), min(y_dim, y_dim + y_shift)),
