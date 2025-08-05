@@ -8,7 +8,7 @@ conda create -n tomopic -c conda-forge python=3.7
 ```
 Activate the environment:
 ```
-conda ativate tomopic
+
 ```
 To download the codes, please do:
 ```
