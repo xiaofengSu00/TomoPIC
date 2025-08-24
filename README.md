@@ -12,7 +12,7 @@ cobda activate tomopic
 ```
 To download the codes, please do:
 ```
-git clone https://github.com/yijianSU22/TomoPIC.git
+git clone [https://github.com/xiaofengSu00/TomoPIC.git]
 cd TomoPIC
 ```
 Next, install a custom pytorch and relative packages needed by TomoPIC:
